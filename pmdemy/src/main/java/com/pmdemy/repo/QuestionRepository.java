@@ -6,4 +6,6 @@ import com.pmdemy.domain.QuestionMaster;
 
 public interface QuestionRepository extends PagingAndSortingRepository<QuestionMaster, Integer> {
 
+	QuestionMaster findByQNumber(Integer qNUmber);
+
 }

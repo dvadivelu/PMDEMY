@@ -33,6 +33,10 @@ public class QuestionService {
 	public Page<QuestionMaster> listAllByPage(Pageable pageable){
 		return questionRepository.findAll(pageable);
 	}
+	
+	public QuestionMaster findByQNumber(Integer qNUmber) {
+		return questionRepository.findByQNumber(qNUmber);
+	}
 
 
 }
