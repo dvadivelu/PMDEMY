@@ -36,4 +36,7 @@ public class QuestionController {
 	public QuestionMaster findByQuestionNum(@RequestParam(value="qnum", defaultValue="1") Integer qNumber){
 		return questionService.findByQNumber(qNumber);
 	}
+	
+	
+	
 }
