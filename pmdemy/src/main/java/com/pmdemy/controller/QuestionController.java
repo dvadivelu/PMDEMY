@@ -22,12 +22,12 @@ public class QuestionController {
 	}
 	
 	
-	@RequestMapping("/lookup")
+	@RequestMapping("/qlookup")
 	public Iterable<QuestionMaster> greeetUser() {
 		return questionService.lookUp();
 	}
 	
-	@RequestMapping("/listAllByPage")
+	@RequestMapping("/qlistbypage")
 	public Page<QuestionMaster> listAllByPage(Pageable pageable){
 		return questionService.listAllByPage(pageable);
 	}

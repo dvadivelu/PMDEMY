@@ -20,7 +20,7 @@ public class QuestionService {
 	
 	
 	public QuestionMaster createQuestion(QuestionMaster question) {
-		if (!questionRepository.exists(question.getqNumber())) {
+		if (question.getId()==null || !questionRepository.exists(question.getId())) {
 			questionRepository.save(question);
 		}
 		return null;
