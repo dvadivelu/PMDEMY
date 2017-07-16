@@ -12,8 +12,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.pmdemy.domain.DifficultyLevel;
 import com.pmdemy.domain.ExamMaster;
 import com.pmdemy.domain.QuestionMaster;
+import com.pmdemy.domain.UserMaster;
 import com.pmdemy.service.ExamService;
 import com.pmdemy.service.QuestionService;
+import com.pmdemy.service.UserService;
 
 @SpringBootApplication
 public class PmdemyApplication implements CommandLineRunner {
@@ -23,6 +25,9 @@ public class PmdemyApplication implements CommandLineRunner {
 
 	@Autowired
 	private ExamService examService;
+	
+	@Autowired
+	private UserService userService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PmdemyApplication.class, args);
@@ -62,6 +67,9 @@ public class PmdemyApplication implements CommandLineRunner {
 		 	examService.createExam(new ExamMaster("Exam consectetur porro", "E0003", DifficultyLevel.Level3));
 		 	examService.createExam(new ExamMaster("Exam adipisci porro", "E0004", DifficultyLevel.Level4));
 		 	examService.createExam(new ExamMaster("Exam velit porro", "E0005", DifficultyLevel.Level5));
+		 	
+		 	userService.createUser(new UserMaster("Dinesh Vadivelu", "hsenid", "dinesh.vadivelu@gmail.com"));
+			userService.createUser(new UserMaster("John Doe", "hsenid", "john.doe@gmail.com"));
 
 	
 
