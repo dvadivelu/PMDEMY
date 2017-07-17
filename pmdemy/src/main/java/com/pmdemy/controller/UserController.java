@@ -19,12 +19,22 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@RequestMapping("/login")
-	public String loginUser(@RequestParam(value = "name", required = true) String userName,
+	@RequestMapping("/create")
+	public String createUser(@RequestParam(value = "uname", required = true) String userName,
 			@RequestParam(value = "password", required = true) String password,
 			@RequestParam(value = "email", required = true) String email) {
 
-		userService.createUser(new UserMaster(userName, new BCryptPasswordEncoder().encode(password), email));
+		userService.createUser(new UserMaster(userName,password, email));
+		return "home";
+	}
+	
+	
+	@RequestMapping("/login")
+	public String loginUser(@RequestParam(value = "email", required = true) String email,
+			@RequestParam(value = "password", required = true) String password
+		) {
+
+		userService.validateUser(new UserMaster("",password,email));
 		return "home";
 	}
 }

@@ -50,6 +50,9 @@ public class UserMaster {
 		this.email = email;
 	}
 	
+	public UserMaster() {
+		
+	}
 	
 	
 
