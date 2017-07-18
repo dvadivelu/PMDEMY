@@ -1,7 +1,6 @@
 package com.pmdemy.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,21 +19,28 @@ public class UserController {
 	}
 
 	@RequestMapping("/create")
-	public String createUser(@RequestParam(value = "uname", required = true) String userName,
+	public String createUser(
 			@RequestParam(value = "password", required = true) String password,
 			@RequestParam(value = "email", required = true) String email) {
-
-		userService.createUser(new UserMaster(userName,password, email));
-		return "home";
+		String viewStr = null;
+		UserMaster userMaster = userService.createUser(new UserMaster("", password, email));
+		if (userMaster == null) {
+			viewStr = "index";
+		} else {
+			viewStr = "home";
+		}
+		return viewStr;
 	}
-	
-	
+
 	@RequestMapping("/login")
 	public String loginUser(@RequestParam(value = "email", required = true) String email,
-			@RequestParam(value = "password", required = true) String password
-		) {
-
-		userService.validateUser(new UserMaster("",password,email));
-		return "home";
+			@RequestParam(value = "password", required = true) String password) {
+		String view = "";
+		if (userService.validateUser(new UserMaster("", password, email))) {
+			view = "home";
+		} else {
+			view = "index";
+		}
+		return view;
 	}
 }

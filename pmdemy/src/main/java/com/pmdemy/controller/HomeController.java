@@ -10,5 +10,11 @@ public class HomeController {
 	public String home() {
 		return "home";
 	}
+	
+	
+	@RequestMapping("/")
+	public String landingPage() {
+		return "index";
+	}
 
 }

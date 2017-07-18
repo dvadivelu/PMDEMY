@@ -23,8 +23,8 @@ public class UserService {
 	
 	public UserMaster createUser(UserMaster userMaster) {
 		if (findUser(userMaster.getEmail())==null) {
-			userMaster.setPassword( new BCryptPasswordEncoder().encode(userMaster.getPassword()));
-			userRespository.save(userMaster);
+			//userMaster.setPassword( new BCryptPasswordEncoder().encode(userMaster.getPassword()));
+			return userRespository.save(userMaster);
 		}
 		return null;
 	}
@@ -32,8 +32,14 @@ public class UserService {
 	
 	public boolean validateUser(UserMaster userMaster) {
 		UserMaster userFromDB = findUser(userMaster.getEmail());
-		userMaster.setPassword( new BCryptPasswordEncoder().encode(userMaster.getPassword()));
-		return (userMaster.getPassword().equals(userFromDB.getPassword()));
+		//userMaster.setPassword( new BCryptPasswordEncoder().encode(userMaster.getPassword()));
+		boolean retVal = false;
+		if(userFromDB == null) {
+			retVal = false;
+		}else {
+			retVal = userMaster.getPassword().equals(userFromDB.getPassword());
+		}
+		return retVal;
 		}
 	
 	public UserMaster findUser(String email) {

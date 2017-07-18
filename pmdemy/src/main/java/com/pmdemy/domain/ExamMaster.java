@@ -15,6 +15,10 @@ public class ExamMaster {
 	private String examId;
 	private DifficultyLevel difficultyLevel;
 
+	public ExamMaster() {
+		
+	}
+			
 	public ExamMaster(String examName, String examId, DifficultyLevel difficultyLevel) {
 		super();
 		this.examName = examName;
