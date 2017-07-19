@@ -31,16 +31,18 @@
 <div class="container" style="margin-top:100px">
 
 <h4> Exams </h4>
-   <table class="table table-striped">
+   <table class="table table-hovers">
       <tr>
         <th>Exam ID</th>
         <th>Exam Name</th>
         <th>Difficulty Level</th>
+         <th></th>
       </tr>
       <tr th:each="exam : ${exams}">
         <td th:text="${exam.examId}">Exam ID</td>
         <td th:text="${exam.examName}">Exam Name</td>
          <td th:text="${exam.difficultyLevel.toString()}">Exam Name</td>
+                  <td><a th:href="@{'/startExam?examId='+${exam.examId}}" class="btn btn-info" role="button">Start</a></td>
       </tr>
     </table>
     

@@ -27,5 +27,9 @@ public class ExamService {
 	public Iterable<ExamMaster> lookUp() {
 		return examRepository.findAll();
 	}
+	
+	public Iterable<ExamMaster> findByExamId(String examId){
+	return examRepository.findByExamId(examId);
+	}
 
 }
