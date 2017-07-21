@@ -1,5 +1,8 @@
 package com.pmdemy.repo;
 
+import java.util.List;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.pmdemy.domain.DifficultyLevel;
@@ -9,6 +12,9 @@ public interface QuestionRepository extends PagingAndSortingRepository<QuestionM
 
 	public QuestionMaster findByQNumber(Integer qNUmber);
 
+	 
+	public List<QuestionMaster> findByDifficultyLevel(DifficultyLevel difficultyLevel,Pageable pagebale) ;
+	
 	public Iterable<QuestionMaster> findByDifficultyLevel(DifficultyLevel difficultyLevel) ;
 
 }

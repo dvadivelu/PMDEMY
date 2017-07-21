@@ -1,11 +1,11 @@
 package com.pmdemy.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.pmdemy.domain.ExamMaster;
 import com.pmdemy.service.ExamService;
@@ -25,16 +25,16 @@ public class ExamController {
 		model.addAttribute("exams", examService.lookUp());
 		return "exam";
 	}
-	
+
 	@RequestMapping("/elookup")
 	public Iterable<ExamMaster> greeetUser() {
 		return examService.lookUp();
 	}
 
-	
 	@RequestMapping("/startExam")
-	public String startExam(@RequestParam(value="examId") String examId) {
-		examService.findByExamId("dinesh.vadivelu@gmail.com", examId);
-		return "exam";
+	public String startExam(@RequestParam(value = "examId") String examId, @RequestParam(value = "pageNum") int pageNum , Model model) {
+		model.addAttribute("exam", examService.findByExamId("dinesh.vadivelu@gmail.com", examId, new PageRequest(pageNum, 1)));
+		model.addAttribute("name", "Dinesh");
+		return "finalexam";
 	}
 }

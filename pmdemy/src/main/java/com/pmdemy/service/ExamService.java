@@ -2,8 +2,10 @@ package com.pmdemy.service;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.pmdemy.domain.ExamMaster;
@@ -13,11 +15,10 @@ import com.pmdemy.domain.UserExamDetails;
 import com.pmdemy.domain.UserMaster;
 import com.pmdemy.repo.ExamRepository;
 
-import groovyjarjarantlr.collections.List;
-
 @Service
 public class ExamService {
 
+	@Autowired
 	private ExamRepository examRepository;
 
 	@Autowired
@@ -32,9 +33,8 @@ public class ExamService {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	public ExamService(ExamRepository examRepository) {
-		this.examRepository = examRepository;
+	public ExamService() {
+
 	}
 
 	public QuestionMaster createExam(ExamMaster examMaster) {
@@ -48,13 +48,12 @@ public class ExamService {
 		return examRepository.findAll();
 	}
 
-	public Iterable<QuestionMaster> findByExamId(String userId, String examId) {
-
+	public QuestionMaster findByExamId(String userId, String examId, Pageable pageable) {
 		ExamMaster examMaster = examRepository.findByExamId(examId);
-
 		UserMaster userMaster = userService.findUser(userId);
-
 		Iterable<QuestionMaster> qMasters = null;
+		List<QuestionMaster> eQuestion = null;
+		QuestionMaster retQMater = null;
 		if (userMaster != null) {
 			UserExam userExam = new UserExam();
 			userExam.setUserId(userMaster.getId());
@@ -69,7 +68,6 @@ public class ExamService {
 				list.add(uExam);
 				userExams = list;
 			}
-
 			for (UserExam exam : userExams) {
 				if (exam.getExamEnd() == null) {
 					qMasters = questionService.findByDifficultyLevel(examMaster.getDifficultyLevel());
@@ -84,10 +82,12 @@ public class ExamService {
 				}
 
 			}
-
+			eQuestion = questionService.findByDifficultyLevel(examMaster.getDifficultyLevel(),pageable);
+			if(eQuestion!=null && eQuestion.size()>0) {
+				retQMater = eQuestion.get(0);
+			}
 		}
-
-		return qMasters;
+		return retQMater;
 	}
 
 }

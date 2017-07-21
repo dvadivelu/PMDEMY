@@ -1,5 +1,7 @@
 package com.pmdemy.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,9 +41,12 @@ public class QuestionService {
 		return questionRepository.findByQNumber(qNUmber);
 	}
 
-	
 	public Iterable<QuestionMaster> findByDifficultyLevel(DifficultyLevel difficultyLevel) {
 		return questionRepository.findByDifficultyLevel(difficultyLevel);
+	}
+	
+	public List<QuestionMaster> findByDifficultyLevel(DifficultyLevel difficultyLevel, Pageable pageable) {
+		return questionRepository.findByDifficultyLevel(difficultyLevel, pageable);
 	}
 
 }
