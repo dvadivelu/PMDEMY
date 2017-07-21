@@ -1,6 +1,9 @@
 package com.pmdemy.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class UserExamDetails {
@@ -17,6 +20,10 @@ public class UserExamDetails {
 		this.correctAnswer = correctAnswer;
 	}
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer id;
+	
 	private Integer userExamId;
 
 	private Integer qNumber;
@@ -55,6 +62,14 @@ public class UserExamDetails {
 
 	public void setCorrectAnswer(String correctAnswer) {
 		this.correctAnswer = correctAnswer;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

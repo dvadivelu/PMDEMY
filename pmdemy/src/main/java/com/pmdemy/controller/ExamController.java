@@ -34,7 +34,7 @@ public class ExamController {
 	
 	@RequestMapping("/startExam")
 	public String startExam(@RequestParam(value="examId") String examId) {
-		examService.findByExamId(examId);
+		examService.findByExamId("dinesh.vadivelu@gmail.com", examId);
 		return "exam";
 	}
 }

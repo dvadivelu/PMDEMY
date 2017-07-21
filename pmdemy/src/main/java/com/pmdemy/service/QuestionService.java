@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.pmdemy.domain.DifficultyLevel;
 import com.pmdemy.domain.QuestionMaster;
 import com.pmdemy.repo.QuestionRepository;
 
@@ -38,5 +39,9 @@ public class QuestionService {
 		return questionRepository.findByQNumber(qNUmber);
 	}
 
+	
+	public Iterable<QuestionMaster> findByDifficultyLevel(DifficultyLevel difficultyLevel) {
+		return questionRepository.findByDifficultyLevel(difficultyLevel);
+	}
 
 }

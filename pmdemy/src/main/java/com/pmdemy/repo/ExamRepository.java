@@ -6,5 +6,5 @@ import com.pmdemy.domain.ExamMaster;
 
 public interface ExamRepository extends CrudRepository<ExamMaster, Integer> {
 
-	public Iterable<ExamMaster> findByExamId(String examId);
+	public ExamMaster findByExamId(String examId);
 }
